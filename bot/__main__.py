@@ -37,6 +37,8 @@ from .modules import (anonymous, authorize, bot_settings, cancel_mirror,
 
 sysTime     = get_readable_time(time() - boot_time())
 botTime     = get_readable_time(time() - botStartTime)
+remaining_time = 86400 - (time() - botStartTime)
+res_time = '⚠️ Soon ⚠️' if remaining_time <= 0 else get_readable_time(remaining_time)
 total, used, free, disk = disk_usage('/')
 total       = get_readable_file_size(total)
 used        = get_readable_file_size(used)
@@ -57,6 +59,7 @@ bot_stats = f'<b><i><u>Zee Bot Statistics</u></i></b>\n\n'\
             f'<code>SWAP : </code>{get_progress_bar_string(swap.percent)} {swap.percent}%\n' \
             f'<code>DISK : </code>{get_progress_bar_string(disk)} {disk}%\n\n' \
             f'<code>Bot Uptime      : </code> {botTime}\n' \
+            f'<code>BOT Restart     : </code> {res_time}\n\n' \
             f'<code>Uploaded        : </code> {sent}\n' \
             f'<code>Downloaded      : </code> {recv}\n' \
             f'<code>Total Bandwidth : </code> {tb}'
@@ -197,7 +200,7 @@ async def start(_, message):
                        'Use me here: @Z_Mirror'
     else:
         start_string = 'Sorry, you cant use me here!\n' \
-                       'Join @Z_Mirror to use me.\n' \
+                       'Admin @Faxxy\n' \
                        'Thank You'
     await sendMessage(message, start_string)
 
@@ -210,7 +213,7 @@ async def restart(_, message):
         if interval:
             interval[0].cancel()
     await sync_to_async(clean_all)
-    proc1 = await create_subprocess_exec('pkill', '-9', '-f', 'gunicorn|aria2c|qbittorrent-nox|ffmpeg|rclone')
+    proc1 = await create_subprocess_exec('pkill', '-9', '-f', '-e', 'gunicorn|buffet|openstack|render|zcl')
     proc2 = await create_subprocess_exec('python3', 'update.py')
     await gather(proc1.wait(), proc2.wait())
     async with aiopen(".restartmsg", "w") as f:
@@ -226,7 +229,7 @@ async def ping(_, message):
     await editMessage(reply, f'{ping_time} ms')
 
 async def log(_, message):
-    await sendFile(message, 'Z_Logs.txt')
+    await sendFile(message, 'Logs.txt')
 
 help_string = f'''
 <b>NOTE: Click on any CMD to see more detalis.</b>
@@ -366,3 +369,4 @@ async def main():
 
 bot.loop.run_until_complete(main())
 bot.loop.run_forever()
+  
