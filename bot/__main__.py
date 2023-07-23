@@ -200,7 +200,7 @@ async def start(_, message):
                        'Use me here: @Z_Mirror'
     else:
         start_string = 'Sorry, you cant use me here!\n' \
-                       'Join @Z_Mirror to use me.\n' \
+                       'Admin @Faxxy\n' \
                        'Thank You'
     await sendMessage(message, start_string)
 
@@ -229,7 +229,7 @@ async def ping(_, message):
     await editMessage(reply, f'{ping_time} ms')
 
 async def log(_, message):
-    await sendFile(message, 'Z_Logs.txt')
+    await sendFile(message, 'Logs.txt')
 
 help_string = f'''
 <b>NOTE: Click on any CMD to see more detalis.</b>
