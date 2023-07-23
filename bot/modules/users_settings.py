@@ -127,7 +127,7 @@ async def update_user_settings(query):
     user_id = query.from_user.id
     tpath = f"Thumbnails/{user_id}.jpg"
     if not ospath.exists(tpath):
-        tpath = "https://graph.org/file/25545597de34c640b31d6.jpg"
+        tpath = ""
     await query.message.edit_media(
         media=InputMediaPhoto(media=tpath, caption=msg), reply_markup=button)
 
