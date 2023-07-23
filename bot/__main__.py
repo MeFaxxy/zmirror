@@ -200,8 +200,8 @@ async def start(_, message):
                        'Use me here: @Z_Mirror'
     else:
         start_string = 'Sorry, you cant use me here!\n' \
-                       'Join @Z_Mirror to use me.\n' \
-                       'Thank You'
+
+      
     await sendMessage(message, start_string)
 
 
