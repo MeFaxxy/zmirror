@@ -197,7 +197,7 @@ async def start(_, message):
     elif config_dict['DM_MODE']:
         start_string = 'Bot Started.\n' \
                        'Now I can send your stuff here.\n' \
-                       'Use me here: @Z_Mirror'
+                       'Admin @Faxxy\n'
     else:
         start_string = 'Sorry, you cant use me here!\n' \
                        'Admin @Faxxy\n' \
